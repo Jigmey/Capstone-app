@@ -1,0 +1,53 @@
+<% if current_user %>
+    <hr>
+    <%current_user.guilds.each do|guild|%>
+        <h2><%=guild.name%></h2>
+        <p><%=guild.description%></p>
+    <%end%>
+    <hr>
+    <%User.all.each do |user|%>
+        <p><%=user.name%></p>
+        <%=form_tag("/friendships/createfriend", method: :post) do%>
+            <%= hidden_field_tag(:friend_id, user.id) %>
+            <%= submit_tag "Add"%>
+        <%end%>
+    <%end%>
+    <hr>
+    
+    <%= form_tag("/posts", method: :post) do %>
+        <%= text_area :body, ""  %>
+        <%= submit_tag "Post"%>
+    <%end%>
+    <%if current_user%>
+
+        <%@posts.each do |post|%>
+            <h3>Post</h3>
+            <p><%=post.id%></p>
+            <p><%=post.text%></p>
+            <hr>
+            <%post.comments.each do |comment|%>
+                <p>Username: <%=comment.user.name%></p>
+                <p>Comment</p>
+                <p><%=comment.text%></p>
+                <hr>
+            <%end%> 
+
+            <%= form_tag("/comments", method: :post) do %>
+                <%= text_area :body, ""  %>
+                <%= hidden_field_tag(:post_id, post.id)%>
+                <%= submit_tag "Comment"%>
+            <%end%>
+        <%end%>
+    <%end%>
+    <hr>
+<%end%>
+    
+    <iframe 
+        src="http://player.twitch.tv/?channel=esl_alphacas" 
+        height="400" 
+        width="600" 
+        frameborder="0" 
+        scrolling="no"
+        allowfullscreen="true">
+    </iframe>
+

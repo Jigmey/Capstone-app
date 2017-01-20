@@ -1,0 +1,41 @@
+<%if current_user%>
+	<%current_user.guilds.each do|guild|%>
+		<h1><%=guild.name%></h1>
+		<p><%=guild.description%></p>
+	<%end%>
+<%end%>
+<hr>
+<h3>Guild Members</h3>
+<%@user_guilds.each do |guild_members|%>
+	<p><%=guild_members.user.name%></p>
+<%end%>
+<hr>
+
+<%= form_tag("/posts", method: :post) do %>
+	<%= text_area :body, ""  %>
+	<%= submit_tag "Post"%>
+<%end%>
+<!-- Create a-->
+
+<%if current_user%>
+	<%@posts.each do |post|%>
+		<h3>Post</h3>
+		<p><%=post.text%></p>
+		<p><%=post.user.name%></p>
+		<p><%=post.is_this_guild%></p>
+		<hr>
+
+		<%post.comments.each do |comment|%>
+			<p><%=comment.user.name%></p>
+			<p>Comment</p>
+			<p><%=comment.text%></p>
+			<hr>
+		<%end%>	
+
+		<%= form_tag("/comments", method: :post) do %>
+			<%= text_area :body, ""  %>
+			<%= hidden_field_tag(:post_id, post.id)%>
+			<%= submit_tag "Comment"%>
+		<%end%>
+	<%end%>
+<%end%>

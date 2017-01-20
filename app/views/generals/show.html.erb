@@ -1,0 +1,43 @@
+<h2>Profile</h2>
+<img src="<%=@user.pic%>">
+<hr>
+<a href="/friendships/<%=current_user.id%>"><h3>Friends</h3></a>
+<hr>
+<%if @user.guilds.ids.first == nil%>
+	<a href="/guilds/newguild">Create a guild</a>
+<%else%>
+	<%@user.guilds.each do |guild|%>
+		<h2><%=guild.name%></h2>
+	<%end%>
+<%end%>
+<hr>
+<%if @user%>
+	<%@posts.each do |post|%>
+		<h3>Post</h3>
+		<p><%=post.id%></p>
+		<p><%=post.text%></p>
+		<hr>
+
+		<%post.comments.each do |comment|%>
+			<p><%=comment.user.name%></p>
+			<p>Comment</p>
+			<p><%=comment.text%></p>
+			<hr>
+		<%end%>	
+
+		<%= form_tag("/comments", method: :post) do %>
+			<%= text_area :body, ""  %>
+			<%= hidden_field_tag(:post_id, post.id)%>
+			<!-- hidden tex tag showing current users and create a method.1 -->
+			<%= submit_tag "Comment"%>
+		<%end%>
+	<%end%>
+<%end%>
+<hr>
+<h3>Photo</h3>
+<%@user.photos.each do |photo|%>
+	<img src="<%=photo.src%>">
+<%end%>
+
+
+

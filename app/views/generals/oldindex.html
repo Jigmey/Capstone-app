@@ -1,0 +1,42 @@
+<%User.all.each do |user|%>
+	<p><%=user.name%></p>
+	<%=form_tag("/addfriend", method: :post) do%>
+		<%= submit_tag "Add Friend"%>
+	<%end%>
+<%end%>
+
+<%= form_tag("/post", method: :post) do %>
+	<%= text_area :body, ""  %>
+	<%= submit_tag "Post"%>
+<%end%>
+<%if current_user%>
+	<%@posts.each do |post|%>
+		<p>Post</p>
+		<p><%=post.text%></p>
+
+		<%@comments.each do |comment|%>
+			<p>Comment</p>
+			<p><%=comment.text%></p>
+		<%end%>	
+
+		<%= form_tag("/comment", method: :post) do %>
+			<%= text_area :body, ""  %>
+			<%= submit_tag "Comment"%>
+		<%end%>
+	<%end%>
+<%end%>
+
+<%current_user.guilds.each do|guild|%>
+	<p><%=guild.name%></p>
+	<p><%=guild.description%></p>
+<%end%>
+	
+<iframe 
+	src="http://player.twitch.tv/?channel=esl_alphacas" 
+	height="400" 
+	width="600" 
+	frameborder="0" 
+	scrolling="no"
+	allowfullscreen="true">
+</iframe>
+

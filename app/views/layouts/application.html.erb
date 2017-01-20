@@ -1,0 +1,37 @@
+
+  <!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <% flash.each do |name, message| %>
+   <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     <%= message.html_safe %>
+   </div>
+ <% end %>
+  <body>
+  
+    <title>CapstoneApp</title>
+    <%if current_user%>
+    
+      <li><a href="/generals/<%=current_user.id%>">Profile</a></li>
+      <li><a href="/logout">Logout</a></li>
+      <li><a href="/generals">Home</a></li>
+      <%if current_user.guilds.ids.first%>
+        <li><a href="/guilds/<%=current_user.guilds.ids.first%>">Guild</a></li>
+      <%end%>
+      <p>User: <%=current_user.name%></p>
+    <%elsif%>
+      <li><a href="/login">Login</a></li>
+    <%end%>
+    <%= yield %>
+  </body>
+</html>
