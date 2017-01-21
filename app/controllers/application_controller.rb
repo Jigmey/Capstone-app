@@ -5,12 +5,9 @@ class ApplicationController < ActionController::Base
   	end
   	helper_method :current_user
 
-  	def user_path_way
-  		@user_path_way ||=		
-  		current_user.friends.each do |friend|
-			friend.find_by(id: session[:user_id])
-		end
-  		
-  	end
-  	helper_method :user_path_way
+    def user_path_way
+      @user = User.find(params [:id])  
+    end
+    helper_method :user_path_way
+
 end
