@@ -21,6 +21,24 @@
   
     <title>CapstoneApp</title>
     <%if current_user%>
+    <!--Needs to be fixed. Work on it (Saturday after adding the theme. ADD THEME ON FRIDAY!!)-->
+      <form action="/friendships/<%=user_path_way.id%>" method="get">
+        <input list="browsers" name="browser">
+        <datalist id="browsers">
+          <%User.all.each do |user|%>
+            <option value=<%=user.name%>>
+          <%end%>
+        </datalist>
+        <input type="submit">
+      </form>
+      <!--<div ng-app="app" ng-init="search()">
+        <input type="text" ng-model="SearchBox">
+        <div ng-controller="SearchCtrl">
+          <li ng-repeat= "user in users | filter: SearchBox">
+            <p>{{user.name}}</p>
+          </li>
+        </div>
+      </div>-->
     
       <li><a href="/generals/<%=current_user.id%>">Profile</a></li>
       <li><a href="/logout">Logout</a></li>

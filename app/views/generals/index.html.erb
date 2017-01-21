@@ -1,4 +1,5 @@
 <% if current_user %>
+<!-- Need to make API for this.(After adding theme work on that!)-->
     <hr>
     <%current_user.guilds.each do|guild|%>
         <h2><%=guild.name%></h2>
