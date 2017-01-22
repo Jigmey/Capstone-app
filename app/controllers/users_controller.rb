@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 	def new
 	end
+	def search
+		user=User.find_by name:(params[:username])
+		redirect_to "/generals/#{user.id}"
+	end
 	def create
 		@user = User.new(
 	      name: params[:name],

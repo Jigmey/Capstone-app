@@ -1,43 +1,75 @@
-<h2>Profile</h2>
-<img src="<%=@user.pic%>">
-<hr>
-<a href="/friendships/<%=current_user.id%>"><h3>Friends</h3></a>
-<hr>
-<%if @user.guilds.ids.first == nil%>
-	<a href="/guilds/newguild">Create a guild</a>
-<%else%>
-	<%@user.guilds.each do |guild|%>
-		<h2><%=guild.name%></h2>
-	<%end%>
-<%end%>
-<hr>
-<%if @user%>
-	<%@posts.each do |post|%>
-		<h3>Post</h3>
-		<p><%=post.id%></p>
-		<p><%=post.text%></p>
-		<hr>
 
-		<%post.comments.each do |comment|%>
-			<p><%=comment.user.name%></p>
-			<p>Comment</p>
-			<p><%=comment.text%></p>
-			<hr>
-		<%end%>	
+--------------------------------------------------------------------------
+        <%if current_user.friendships.eql?(friend_id: @user.id)%>
+        	<%FRIENDS%>
+        <%else%>
+	        <%=form_tag("/friendships/createfriend", method: :post) do%>
+	            <%= hidden_field_tag(:friend_id, @user.id) %>
+	            <%= submit_tag "Add"%>
+	        <%end%> 
+	    <%end%>       
+        <div class="widewrapper main">
+        <div class="container about">
+        	<img src="<%=@user.pic%>" alt="Willy Wonka" class="about-portrait img-responsive">
+        	<div class="col-md-6 col-sm-6">
+                            <article class="blog-teaser">
+                            	<%if @user%>
+									<%@posts.each do |post|%>
+										<h3>Post</h3>
+										<p><%=post.id%></p>
+										<p><%=post.text%></p>
+										<hr>
 
-		<%= form_tag("/comments", method: :post) do %>
-			<%= text_area :body, ""  %>
-			<%= hidden_field_tag(:post_id, post.id)%>
-			<!-- hidden tex tag showing current users and create a method.1 -->
-			<%= submit_tag "Comment"%>
-		<%end%>
-	<%end%>
-<%end%>
-<hr>
-<h3>Photo</h3>
-<%@user.photos.each do |photo|%>
-	<img src="<%=photo.src%>">
-<%end%>
+										<%post.comments.each do |comment|%>
+											<p><%=comment.user.name%></p>
+											<p>Comment</p>
+											<p><%=comment.text%></p>
+											<hr>
+										<%end%>	
+
+										<%= form_tag("/comments", method: :post) do %>
+											<%= text_area :body, ""  %>
+											<%= hidden_field_tag(:post_id, post.id)%>
+											<!-- hidden tex tag showing current users and create a 								method.1 -->
+											<%= submit_tag "Comment"%>
+										<%end%>
+									<%end%>
+								<%end%>
+                            </article>
+                        </div>
+            
+
+		            <div class="about-button">
+		                <a class="btn btn-xlarge btn-tales-one" href="/friendships/<%=current_user.id%>">Friends List</a>
+		            </div>
+		            <div class="about-button">
+		            	<%if @user.guilds.ids.first == nil%>
+							<p><a href="/guilds/newguild">Create a guild</a></p>
+							<p><a href="/guilds/joinguild">Join a guild</a></p>
+
+						<%else%>
+							<%@user.guilds.each do |guild|%>
+								<h2><%=guild.name%></h2>
+							<%end%>
+						<%end%>
+		            </div>
+            <hr>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 tales-superblock">
+                    <h2>Social</h2>
+                    <div class="social-icons clearfix">
+                        <%@user.photos.each do |photo|%>
+							<img src="<%=photo.src%>">
+						<%end%>
+                    </div>
+                    <hr>
+                </div>
+            </div>        
+        </div>
+    
 
 
 

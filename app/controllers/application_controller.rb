@@ -5,9 +5,7 @@ class ApplicationController < ActionController::Base
   	end
   	helper_method :current_user
 
-    def user_path_way
-      @user = User.find(params [:id])  
-    end
-    helper_method :user_path_way
-
 end
+
+
+# FOR LIMITING COMMENTS/POSTS Comments.0..10.each do 

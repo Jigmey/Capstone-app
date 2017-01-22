@@ -1,11 +1,15 @@
 <%= form_tag("/users/create", method: :post) do %>
 	<div>  
-	  <%= label_tag(:name) %>
+	  <%= label_tag(:username) %>
 	  <%= text_field_tag(:name) %>
 	</div>
 	<div>
 	  <%=label_tag(:birthdate)%>
 	  <%=text_field_tag(:birthdate)%>
+	</div>
+	<div>
+	  <%=label_tag(:Profile_pic)%>
+	  <%=text_field_tag(:pic)%>
 	</div>
 	<div>
 	  <%= label_tag(:password) %>
@@ -17,3 +21,9 @@
 	</div>
 	<%= submit_tag "Create" %>
 <% end %>
+<hr>
+<img src="http://cdn.appstorm.net/ipad.appstorm.net/files/2011/12/Icon31.png" alt="Willy Wonka" class="about-portrait img-responsive">
+<p> Hi Fellow Gamers,</p>
+<p>Profile Pics need to be a URL image the size of an icon.</p>
+<p>That is all.</p>
+<p>Thank you</p>

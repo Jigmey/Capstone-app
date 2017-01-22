@@ -7,6 +7,10 @@
 	  <%= label_tag(:description) %>
 	  <%= text_field_tag(:description) %>	
 	</div>
+	<div>
+	  <%= label_tag(:Image_Url) %>
+	  <%= text_field_tag(:image_url) %>	
+	</div>
 	<%=hidden_field_tag(user_id: current_user.id)%>
 	<div>
 		<%= submit_tag "Create" %>

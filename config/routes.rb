@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 	get '/generals' => 'generals#index'
 	get '/generals/guild' => 'generals#guild'
 	get '/generals/:id' => 'generals#show'
+
 	
 	#friendship controller
 	get '/friendships/:id'=> 'friendships#show'
@@ -21,12 +22,15 @@ Rails.application.routes.draw do
 
 	#User routes
 	get '/users/signup'=> 'users#new'
+	post '/users/search'=> 'users#search'
 	post '/users/create'=>'users#create'
 
 	#Guild
 	get '/guilds/newguild' => 'guilds#new'
+	get '/guilds/joinguild' => 'guilds#join'
 	get '/guilds/:id'=> 'guilds#show'
-	post '/guilds/createguild'=> 'guilds#create'
+	post '/guilds/createguild'=> 'guilds#createGuild'
+	post '/guilds/joinguild'=> 'guilds#joinGuild'
 
 	#Login routes
 	get '/login'=> 'login#new'

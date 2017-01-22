@@ -3,6 +3,10 @@ class GuildsController < ApplicationController
 		render 'new.html.erb'
 	end
 
+	def join
+		render 'join.html.erb'
+	end
+
 	def show
 
 		@user_guilds=UserGuild.where(guild_id: current_user.guilds.ids)
@@ -18,7 +22,7 @@ class GuildsController < ApplicationController
 		end
 	end
 
-	def create
+	def createGuild
 		@new_guild= Guild.new(
 			name: params[:name],
 			description: params[:description],
@@ -42,8 +46,25 @@ class GuildsController < ApplicationController
 		else
 			p flash[:warning] = 'Sorry Guild not created'
 			redirect_to "/generals/#{current_user.id}"
+		end	
+	end
+
+	def joinGuild
+		if !@user_guilds.nil?
+			redirect_to '/generals'
+		else
+			joinguilds=current_user.user_guilds.first.update(guild_id: params[:guild_id])
+			p "start join"
+			if joinguilds
+				flash[:success]="You Joined A Guild!"
+				redirect_to "/guilds/#{current_user.guilds.ids.first}"
+				p "finishing join"
+			else
+				p "did not join"
+				flash[:error]= "You did not join a guild"
+				redirect_to '/generals'
+			end
 		end
-			
 		
 	end
 end

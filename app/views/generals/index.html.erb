@@ -1,11 +1,4 @@
-<% if current_user %>
-<!-- Need to make API for this.(After adding theme work on that!)-->
-    <hr>
-    <%current_user.guilds.each do|guild|%>
-        <h2><%=guild.name%></h2>
-        <p><%=guild.description%></p>
-    <%end%>
-    <hr>
+<!--NEED TO WORK ON THIS FOR MAKE ADDING FRIENDS MORE SMOOTHER.-->
     <%User.all.each do |user|%>
         <p><%=user.name%></p>
         <%=form_tag("/friendships/createfriend", method: :post) do%>
@@ -13,42 +6,262 @@
             <%= submit_tag "Add"%>
         <%end%>
     <%end%>
-    <hr>
-    
-    <%= form_tag("/posts", method: :post) do %>
-        <%= text_area :body, ""  %>
-        <%= submit_tag "Post"%>
-    <%end%>
-    <%if current_user%>
 
-        <%@posts.each do |post|%>
-            <h3>Post</h3>
-            <p><%=post.id%></p>
-            <p><%=post.text%></p>
-            <hr>
-            <%post.comments.each do |comment|%>
-                <p>Username: <%=comment.user.name%></p>
-                <p>Comment</p>
-                <p><%=comment.text%></p>
-                <hr>
-            <%end%> 
 
-            <%= form_tag("/comments", method: :post) do %>
-                <%= text_area :body, ""  %>
-                <%= hidden_field_tag(:post_id, post.id)%>
-                <%= submit_tag "Comment"%>
-            <%end%>
-        <%end%>
-    <%end%>
-    <hr>
-<%end%>
-    
-    <iframe 
-        src="http://player.twitch.tv/?channel=esl_alphacas" 
-        height="400" 
-        width="600" 
-        frameborder="0" 
-        scrolling="no"
-        allowfullscreen="true">
-    </iframe>
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
 
+<div class="widewrapper main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 blog-main">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <article class="blog-teaser">
+                                <header>
+                                    <img src="img/hands.png" alt="Hands">
+                                    <h3><a href="blog-detail.html">Big Thinkers</a></h3>
+                                    <span class="meta">24 July 2013, Alexander Rechsteiner</span>
+                                    <hr>
+                                </header>
+                                <div class="body">
+                                    Bacon ipsum dolor sit amet esse duis pastrami anim, pancetta fatback capicola officia tenderloin. Meatloaf culpa ut, bacon sed sausage jerky cillum est ham ad laboris ham hock dolore. Venison ut enim, aliqua elit frankfurter et incididunt consequat culpa nostru aliqua elit pancetta. 
+                                </div>
+                                <div class="clearfix">
+                                    <a href="blog-detail.html" class="btn btn-tales-one">Read more</a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            <article class=" blog-teaser">
+                                <header>
+                                    <div class="body">
+                                        <% if current_user %>
+                                            <%= form_tag("/posts", method: :post) do %>
+                                                <%= text_area :body, ""  %>
+                                                <%= submit_tag "Post"%>
+                                            <%end%>
+
+                                            <%@posts.each do |post|%>
+                                                <h3>Post</h3>
+                                                <p><%=post.id%></p>
+                                                <p><%=post.text%></p>
+                                            
+                                                <%post.comments.each do |comment|%>
+                                                    <p>Username: <%=comment.user.name%></p>
+                                                    <p>Comment</p>
+                                                    <p><%=auto_link(comment.text)%></p>
+                                                <%end%>
+
+
+                                                <%= form_tag("/comments", method: :post) do %>
+
+                                                    <%=  text_area :body, ""  %>
+
+                                                   
+                                                    <%= hidden_field_tag(:post_id, post.id)%>
+                                                    <%= submit_tag "Comment"%>
+                                                <%end%>
+                                            <%end%>
+                                        <%end%>
+                                    </div>
+
+                                </header>
+                            </article>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <article class="blog-teaser">
+                                <header>
+                                    <img src="img/bike.png" alt="A Bike">
+                                    <h3><a href="blog-detail.html">My Insightful Article</a></h3>
+                                    <span class="meta">24 July 2013, Alexander Rechsteiner</span>
+                                    <hr>
+                                </header>
+                                <div class="body">
+                                    Bacon ipsum dolor sit amet esse duis pastrami anim, pancetta fatback capicola officia tenderloin. Meatloaf culpa ut, bacon sed sausage jerky cillum est ham ad laboris ham hock dolore. Venison ut enim, aliqua elit frankfurter et incididunt consequat culpa nostru aliqua elit pancetta. 
+                                </div>
+                                <div class="clearfix">
+                                    <a href="blog-detail.html" class="btn btn-tales-one">Read more</a>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <article class="blog-teaser">
+                                <header>
+                                    <img src="img/violin.png" alt="A Violin Player">
+                                    <h3><a href="blog-detail.html">Why I Play Violin</a></h3>
+                                    <span class="meta">24 July 2013, Alexander Rechsteiner</span>
+                                    <hr>
+                                </header>
+                                <div class="body">
+                                    Bacon ipsum dolor sit amet esse duis pastrami anim, pancetta fatback capicola officia tenderloin. Meatloaf culpa ut, bacon sed sausage jerky cillum est ham ad laboris ham hock dolore. Venison ut enim, aliqua elit frankfurter et incididunt consequat culpa nostru aliqua elit pancetta. 
+                                </div>
+                                <div class="clearfix">
+                                    <a href="blog-detail.html" class="btn btn-tales-one">Read more</a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="paging">
+                        <a href="#" class="newer"><i class="fa fa-long-arrow-left"></i> Newer</a>
+                         <span>&bull;</span>
+                        <a href="#" class="older">Older <i class="fa fa-long-arrow-right"></i></a>
+                    </div>
+                </div>
+                <aside class="col-md-4 blog-aside">
+                    
+                    <div class="aside-widget">
+                        <header>
+                            <h3>Twitch</h3>
+                        </header>
+                        <div class="body">
+                        <!--TWITCH STREAMS-->
+                            <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+                            <div id="{PLAYER_DIV_ID}"></div>
+                            <script type="text/javascript">
+                                var options = {
+                                    width: 340,
+                                    height: 300,
+                                    channel: "{herdyn}", 
+                                    //video: "{VIDEO_ID}"       
+                                };
+                                var player = new Twitch.Player("{PLAYER_DIV_ID}", options);
+                                player.setMuted(true);
+                                player.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
+                            </script>
+
+                        </div>
+                        <div class="body">
+                        <!--TWITCH STREAMS-->
+                            <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+                            <div id="{PLAYER_DIV_ID}"></div>
+                            <script type="text/javascript">
+                                var options = {
+                                    width: 340,
+                                    height: 300,
+                                    channel: "{ster}", 
+                                    //video: "{VIDEO_ID}"       
+                                };
+                                var player = new Twitch.Player("{PLAYER_DIV_ID}", options);
+                                player.setMuted(true);
+                                player.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
+                            </script> 
+                        
+                        </div>
+                        <div class="body">
+                        <!--TWITCH STREAMS-->
+                            <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+                            <div id="{PLAYER_DIV_ID}"></div>
+                            <script type="text/javascript">
+                                var options = {
+                                    width: 340,
+                                    height: 300,
+                                    channel: "{vgbootcamp}", 
+                                    //video: "{VIDEO_ID}"       
+                                };
+                                var player = new Twitch.Player("{PLAYER_DIV_ID}", options);
+                                player.setMuted(true);
+                                player.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
+                            </script>               
+                            
+                        </div>
+                    </div>
+                
+                    <div class="aside-widget">
+                        <header>
+                            <h3>Authors Favorites</h3>
+                        </header>
+                        <div class="body">
+                            <ul class="tales-list">
+                                <li><a href="index.html">Email Encryption Explained</a></li>
+                                <li><a href="#">Selling is a Function of Design.</a></li>
+                                <li><a href="#">It’s Hard To Come Up With Dummy Titles</a></li>
+                                <li><a href="#">Why the Internet is Full of Cats</a></li>
+                                <li><a href="#">Last Made-Up Headline, I Swear!</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="aside-widget">
+                        <header>
+                            <h3>Tags</h3>
+                        </header>
+                        <div class="body clearfix">
+                            <ul class="tags">
+                                <li><a href="#">OpenPGP</a></li>
+                                <li><a href="#">Django</a></li>
+                                <li><a href="#">Bitcoin</a></li>
+                                <li><a href="#">Security</a></li>
+                                <li><a href="#">GNU/Linux</a></li>
+                                <li><a href="#">Git</a></li>
+                                <li><a href="#">Homebrew</a></li>
+                                <li><a href="#">Debian</a></li>                            
+                            </ul>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="widewrapper footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 footer-widget">
+                        <h3> <i class="fa fa-wpforms"></i>Statistics</h3>
+
+                        <span>Even we sometimes loose track of how many articles we actually have here.  This one helps:</span>
+
+                        <div class="stats">
+                            <div class="line">
+                                <span class="counter">27</span>
+                                <span class="caption">Articles</span>
+                            </div>
+                            <div class="line">
+                                <span class="counter">208</span>
+                                <span class="caption">Comments</span>
+                            </div>
+                            <div class="line">
+                                <span class="counter">2</span>
+                                <span class="caption">Authors</span>
+                            </div>                    
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 footer-widget">
+                        <h3> <i class="fa fa-star"></i> Hall of Fame</h3>
+                        <ul class="tales-list">
+                            <li><a href="index.html">Why we Need to Encrypt All Communication</a></li>
+                            <li><a href="#">Selling is a Function of Design. Not Vice-Versa.</a></li>
+                            <li><a href="#">It’s Hard To Come Up With Dummy Titles</a></li>
+                            <li><a href="#">Why the Internet is Full of Cats</a></li>
+                            <li><a href="#">Last Made-Up Headline, I Swear!</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 footer-widget">
+                        <h3> <i class="fa fa-envelope"></i>Contact Me</h3>
+
+                        <span>I'm happy to hear from my readers. Thoughts, feedback, critique - all welcome! Drop me a line:</span>
+                        
+                        <span class="email">
+                            <a href="#">jimmy@notanactualemail.com</a>, PGP key 0x5AK0BEA1
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widewrapper copyright">
+            <div class="container">
+                <!--Note: Feel free to remove or change this link as you please. A link to HackerThemes is not required by any means-->
+                Designed by <a href="http://hackerthemes.com" rel="nofollow">HackerThemes</a>
+            </div>
+        </div>
+    </footer>
