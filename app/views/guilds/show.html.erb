@@ -1,41 +1,64 @@
+<link rel="stylesheet" href="/css/styles-dark-yellow.css" id="theme-styles">
+
 <%if current_user%>
 	<%current_user.guilds.each do|guild|%>
 		<h1><%=guild.name%></h1>
+		<%=form_tag("/guilds/deleteguild", method: :delete) do %>
+
+        	<%=submit_tag "Leave guild"%>
+    	<%end%>
 		<p><%=guild.description%></p>
 	<%end%>
 <%end%>
 <hr>
 <h3>Guild Members</h3>
-<%@user_guilds.each do |guild_members|%>
-	<p><%=guild_members.user.name%></p>
+
+<!--WORK ON IF/ELSE STATEMENT-->
+<%if current_user.user_guilds.length>1%>
+	<%@user_guilds.each do |guild_members|%>
+		<p><%=guild_members.user.name%></p>
+	<%end%>
 <%end%>
 <hr>
-
-<%= form_tag("/posts", method: :post) do %>
-	<%= text_area :body, ""  %>
-	<%= submit_tag "Post"%>
-<%end%>
+<div class="col-md-8 ">
+    <article class=" blog-teaser">
+        <header>
+			<%= form_tag("/posts", method: :post) do %>
+				<%= text_area :body, ""  %>
+				<%= submit_tag "Post"%>
+			<%end%>
+		</header>
+	</article>
 <!-- Create a-->
 
 <%if current_user%>
 	<%@posts.each do |post|%>
-		<h3>Post</h3>
-		<p><%=post.text%></p>
-		<p><%=post.user.name%></p>
-		<p><%=post.is_this_guild%></p>
-		<hr>
+		<div class="col-md-12 ">
+	        <article class=" blog-teaser">
+	            <header>
+					<h3>Post</h3>
+					<p><%=post.text%></p>
+					<p><%=post.user.name%></p>
+					<p><%=post.is_this_guild%></p>
+					<hr>
+					<div style="color: #FFFFBE;">
+						<%post.comments.each do |comment|%>
+							<p><%=comment.user.name%></p>
+							<p>Comment</p>
+							<p><%=comment.text%></p>
+							<hr>
+						<%end%>
+					</div>	
 
-		<%post.comments.each do |comment|%>
-			<p><%=comment.user.name%></p>
-			<p>Comment</p>
-			<p><%=comment.text%></p>
-			<hr>
-		<%end%>	
+					<%= form_tag("/comments", method: :post) do %>
+						<%= text_area :body, ""  %>
+						<%= hidden_field_tag(:post_id, post.id)%>
+						<%= submit_tag "Comment"%>
+					<%end%>
+				</header>
+			</article>
+		</div>
 
-		<%= form_tag("/comments", method: :post) do %>
-			<%= text_area :body, ""  %>
-			<%= hidden_field_tag(:post_id, post.id)%>
-			<%= submit_tag "Comment"%>
-		<%end%>
 	<%end%>
+
 <%end%>

@@ -76,7 +76,7 @@ hr {
 }
 /* Widewrappers that span the whole width of the page */
 .widewrapper {
-  background-color: #262626;
+  background-color: #3C3A38;
 }
 .widewrapper.main {
   -webkit-box-shadow: inset 1px 10px 8px -8px #2d2c32;
@@ -608,7 +608,7 @@ hr {
   padding-top: 20px;
   padding-right: 45px;
   padding-left: 45px;
-  text-align: center;
+  text-align: left;
 }
 .blog-teaser header img {
   margin-bottom: 20px;

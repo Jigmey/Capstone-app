@@ -1,74 +1,91 @@
+<link rel="stylesheet" href="/css/styles-elegantblue.css" id="theme-styles">
+<!--THIS IS IF/FRIENDS OR NOT STATEMENT-->
 
---------------------------------------------------------------------------
-        <%if current_user.friendships.eql?(friend_id: @user.id)%>
-        	<%FRIENDS%>
-        <%else%>
-	        <%=form_tag("/friendships/createfriend", method: :post) do%>
-	            <%= hidden_field_tag(:friend_id, @user.id) %>
-	            <%= submit_tag "Add"%>
-	        <%end%> 
-	    <%end%>       
-        <div class="widewrapper main">
-        <div class="container about">
-        	<img src="<%=@user.pic%>" alt="Willy Wonka" class="about-portrait img-responsive">
-        	<div class="col-md-6 col-sm-6">
-                            <article class="blog-teaser">
-                            	<%if @user%>
-									<%@posts.each do |post|%>
-										<h3>Post</h3>
-										<p><%=post.id%></p>
-										<p><%=post.text%></p>
-										<hr>
+<%if current_user.friendships.where(user_id: current_user.id).where(friend_id: @user.id).length < 1 && current_user.id != @user.id %>
+	<%=form_tag("/friendships/createfriend", method: :post) do%>
+	    <%= hidden_field_tag(:friend_id, @user.id) %>
+	    <%= submit_tag "Add"%>
+	<%end%>
+<%end%>  
 
-										<%post.comments.each do |comment|%>
-											<p><%=comment.user.name%></p>
-											<p>Comment</p>
-											<p><%=comment.text%></p>
-											<hr>
-										<%end%>	
-
-										<%= form_tag("/comments", method: :post) do %>
-											<%= text_area :body, ""  %>
-											<%= hidden_field_tag(:post_id, post.id)%>
-											<!-- hidden tex tag showing current users and create a 								method.1 -->
-											<%= submit_tag "Comment"%>
-										<%end%>
-									<%end%>
-								<%end%>
-                            </article>
-                        </div>
-            
-
-		            <div class="about-button">
-		                <a class="btn btn-xlarge btn-tales-one" href="/friendships/<%=current_user.id%>">Friends List</a>
-		            </div>
-		            <div class="about-button">
-		            	<%if @user.guilds.ids.first == nil%>
-							<p><a href="/guilds/newguild">Create a guild</a></p>
-							<p><a href="/guilds/joinguild">Join a guild</a></p>
-
-						<%else%>
-							<%@user.guilds.each do |guild|%>
-								<h2><%=guild.name%></h2>
-							<%end%>
-						<%end%>
-		            </div>
-            <hr>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3 tales-superblock">
-                    <h2>Social</h2>
-                    <div class="social-icons clearfix">
-                        <%@user.photos.each do |photo|%>
-							<img src="<%=photo.src%>">
-						<%end%>
-                    </div>
-                    <hr>
+<div class="widewrapper main">
+	<div class="container about">
+	    <img src="<%=@user.pic%>" alt="Willy Wonka" class="about-portrait img-responsive">
+	    <div class="about-button">
+			<a class="btn btn-xlarge btn-tales-one" href="/friendships/<%=current_user.id%>">Friends List</a>
+		</div>
+		<div class="about-button">
+			<!--IF USER IS IN GUILD OR NOT STATEMENT-->
+			<%if @user.guilds.ids.first == nil%>
+				<p><a href="/guilds/newguild">Create a guild</a></p>
+				<p><a href="/guilds/joinguild">Join a guild</a></p>
+			<%else%>
+				<%@user.guilds.each do |guild|%>
+					<h2><%=guild.name%></h2>
+				<%end%>
+			<%end%>
+		</div>
+	        <!--POST/COMMENTS FUNCTION-->
+	        <%if @user%>
+				<div class="col-md-8 ">
+                    <article class=" blog-teaser">
+                        <header>
+                            <%= form_tag("/posts", method: :post) do %>
+                                <%= text_area :body, ""  %>
+                                <p><%= submit_tag "Post"%></p>
+                            <%end%>
+                        </header>
+                    </article>
                 </div>
-            </div>        
-        </div>
+				<%@posts.each do |post|%>
+					<div class="col-md-8">
+	        			<article class="blog-teaser">
+	        				<header>
+								<h3>Post</h3>
+								<p><%=post.id%></p>
+								<p><%=post.text%></p>
+								<hr>
+								<div style="color: orange;">
+									<%post.comments.each do |comment|%>
+										<p><%=comment.user.name%></p>
+										<p>Comment</p>
+										<p><%=comment.text%></p>
+										<hr>
+									<%end%>
+								</div>	
+
+								<%= form_tag("/comments", method: :post) do %>
+									<%= text_area :body, ""  %>
+									<%= hidden_field_tag(:post_id, post.id)%>
+									<!-- hidden tex tag showing current users and create a method-->
+									<%= submit_tag "Comment"%>
+								<%end%>
+							</header>
+						</article>
+					</div>
+				<%end%>
+			<%end%>
+	        </article>
+	    </div>
+		<hr>
+	</div>
+
+	<div class="container">
+	    <div class="row">
+	        <div class="col-md-6 col-md-offset-3 tales-superblock">
+	            <h2>Social</h2>
+	            <div class="social-icons clearfix">
+	            	<!--PROFILE PIC-->
+	                <%@user.photos.each do |photo|%>
+						<img src="<%=photo.src%>">
+					<%end%>
+	            </div>
+	            <hr>
+	        </div>
+	    </div>        
+	</div>
+</div>
+
     
 
 

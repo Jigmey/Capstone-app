@@ -1,10 +1,6 @@
-<% UserGuild.all.each do |joinguild|%>
-	<%Guild.all.each do |guild|%>
-		<p><%=guild.name%></p>
-
-		<%= form_tag("/guilds/joinguild", method: :post) do%>
-			<%= hidden_field_tag(:guild_id, guild.id)%>
-			<%=submit_tag "Join"%>
-		<%end%>
-	<%end%>
-<%end%>
+<%Guild.all.each do |guild|%>
+<p><%=guild.name%></p>
+<%= form_tag("/guilds/joinguild", method: :post) do%>
+	<%= hidden_field_tag(:guild_id, guild.id)%>
+	<%=submit_tag "Join"%>
+<%end%><%end%>

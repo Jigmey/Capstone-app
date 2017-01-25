@@ -32,7 +32,7 @@ end
 
 def destroy
   p "starting delete"
-  p @friendship = current_user.friendships.find(params[:friendship_id].to_i)
+  p @friendship = current_user.friendships.find_by(params[:friendship_id].to_i)
   p "finding id"
   @friendship.destroy
   p "deleting"

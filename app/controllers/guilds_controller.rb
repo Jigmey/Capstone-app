@@ -7,6 +7,15 @@ class GuildsController < ApplicationController
 		render 'join.html.erb'
 	end
 
+	def search
+		p "test"
+		@guild= Guild.find(params[:id])
+		p "test2"
+		guildname=Guild.find_by name:(params[:guildname])
+		p "test3"
+		redirect_to "/guilds/#{@guild.id}"
+	end
+	
 	def show
 
 		@user_guilds=UserGuild.where(guild_id: current_user.guilds.ids)
@@ -53,9 +62,11 @@ class GuildsController < ApplicationController
 		if !@user_guilds.nil?
 			redirect_to '/generals'
 		else
-			joinguilds=current_user.user_guilds.first.update(guild_id: params[:guild_id])
+			@joinguild=UserGuild.new(
+				user_id: current_user.id,
+				guild_id: params[:guild_id])
 			p "start join"
-			if joinguilds
+			if @joinguild.save
 				flash[:success]="You Joined A Guild!"
 				redirect_to "/guilds/#{current_user.guilds.ids.first}"
 				p "finishing join"
@@ -65,6 +76,15 @@ class GuildsController < ApplicationController
 				redirect_to '/generals'
 			end
 		end
+		
+	end
+	def destroy
+		p "start"
+		p leaveguild = current_user.user_guilds.find_by(guild_id: current_user.guilds.first.id)
+		p "deleting"
+		leaveguild.destroy
+		flash[:notice]= "You are out of the guild"
+		redirect_to "/generals/#{current_user.id}"
 		
 	end
 end

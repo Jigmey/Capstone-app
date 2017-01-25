@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 		@user = User.new(
 	      name: params[:name],
 	      birthdate: params[:birthdate],
+	      pic: params[:pic],
 	      password: params[:password],
 	      password_confirmation: params[:password_confirmation]
 	    )

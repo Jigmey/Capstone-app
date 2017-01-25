@@ -29,8 +29,10 @@ Rails.application.routes.draw do
 	get '/guilds/newguild' => 'guilds#new'
 	get '/guilds/joinguild' => 'guilds#join'
 	get '/guilds/:id'=> 'guilds#show'
+	post '/guilds/search'=> 'guilds#search'
 	post '/guilds/createguild'=> 'guilds#createGuild'
 	post '/guilds/joinguild'=> 'guilds#joinGuild'
+	delete '/guilds/deleteguild'=> 'guilds#destroy'
 
 	#Login routes
 	get '/login'=> 'login#new'
