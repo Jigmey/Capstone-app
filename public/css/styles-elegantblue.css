@@ -608,7 +608,7 @@ hr {
   padding-top: 20px;
   padding-right: 45px;
   padding-left: 45px;
-  text-align: center;
+  text-align: left;
 }
 .blog-teaser header img {
   margin-bottom: 20px;
@@ -639,6 +639,13 @@ hr {
   padding-left: 45px;
   margin-bottom: 10px;
   color: #303233;
+}
+.blog-teaser textarea{
+  overflow: auto;
+  width: 95%;
+}
+.blog-teaser .comments{
+  color: blue;
 }
 .blog-teaser .btn {
   float: right;

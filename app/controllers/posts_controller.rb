@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
 	def create
 		p "starting post"
-		@post=Post.new(text: params["body"][0], user_id: current_user.id, is_this_guild: "yes", guild_id: current_user.guilds.ids.first )
+		@post=Post.new(text: params["body"][0], user_id: current_user.id, is_this_guild: params[:is_this_guild], guild_id: current_user.guilds.ids.first )
 		@post.save
 		p current_user.guilds.ids.first
 		p @post.errors.full_messages

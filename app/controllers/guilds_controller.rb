@@ -20,14 +20,21 @@ class GuildsController < ApplicationController
 
 		@user_guilds=UserGuild.where(guild_id: current_user.guilds.ids)
 		
-		guild= Guild.find(params[:id])
+		@guild= Guild.find(params[:id])
 		
-		if current_user.guilds.ids.first != guild.id
-			redirect_to '/generals'
-		else	
-			@posts=Post.where(is_this_guild: "yes").where(guild_id: current_user.guilds.ids.first)#this is what you need to add so that only guild post are shown.
+		if current_user.guilds.ids.first == @guild.id
+			@page=params[:page].to_i+1
+			#this is what you need to add so that only guild post are shown.
+			if params[:page]
+				@posts=Post.where(is_this_guild: "yes").where(guild_id: current_user.guilds.ids.first).order("created_at desc").limit(3).order("created_at desc").offset(@page.to_i*1.8)
+			else 
+				@posts=Post.where(is_this_guild: "yes").where(guild_id: current_user.guilds.ids.first).order("created_at desc").limit(3).order("created_at desc")
+			end
+			
 			@comments=Comment.where(user_id:current_user).where(is_this_guild: "yes").where(guild_id: current_user.guilds.ids.first)
 			render 'show.html.erb'
+		else	
+			redirect_to '/generals'
 		end
 	end
 

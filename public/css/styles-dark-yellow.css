@@ -610,6 +610,12 @@ hr {
   padding-left: 45px;
   text-align: left;
 }
+.blog-teaser button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color:black;
+}
 .blog-teaser header img {
   margin-bottom: 20px;
   -webkit-border-radius: 200px;
@@ -639,6 +645,13 @@ hr {
   padding-left: 45px;
   margin-bottom: 10px;
   color: #d3dae1;
+}
+.blog-teaser textarea{
+  overflow: auto;
+  width: 95%;
+}
+.blog-teaser .comments{
+  color: #cc8f38;
 }
 .blog-teaser .btn {
   float: right;

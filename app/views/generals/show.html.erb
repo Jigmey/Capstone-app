@@ -26,7 +26,7 @@
 			<%end%>
 		</div>
 	        <!--POST/COMMENTS FUNCTION-->
-	        <%if @user%>
+	    <%if @user%>
 				<div class="col-md-8 ">
                     <article class=" blog-teaser">
                         <header>
@@ -39,13 +39,13 @@
                 </div>
 				<%@posts.each do |post|%>
 					<div class="col-md-8">
-	        			<article class="blog-teaser">
-	        				<header>
+	        	<article class="blog-teaser">
+	        		<header>
 								<h3>Post</h3>
 								<p><%=post.id%></p>
 								<p><%=post.text%></p>
 								<hr>
-								<div style="color: orange;">
+								<div class="comments">
 									<%post.comments.each do |comment|%>
 										<p><%=comment.user.name%></p>
 										<p>Comment</p>
@@ -65,8 +65,7 @@
 					</div>
 				<%end%>
 			<%end%>
-	        </article>
-	    </div>
+			<!--Need to fix old-pages-->
 		<hr>
 	</div>
 
@@ -76,9 +75,9 @@
 	            <h2>Social</h2>
 	            <div class="social-icons clearfix">
 	            	<!--PROFILE PIC-->
-	                <%@user.photos.each do |photo|%>
-						<img src="<%=photo.src%>">
-					<%end%>
+	              <%@user.photos.each do |photo|%>
+					  			<img src="<%=photo.src%>">
+								<%end%>
 	            </div>
 	            <hr>
 	        </div>
