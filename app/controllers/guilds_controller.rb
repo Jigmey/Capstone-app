@@ -1,4 +1,7 @@
 class GuildsController < ApplicationController
+	def frontpage
+		
+	end
 	def new
 		render 'new.html.erb'
 	end
@@ -21,7 +24,7 @@ class GuildsController < ApplicationController
 		@user_guilds=UserGuild.where(guild_id: current_user.guilds.ids)
 		
 		@guild= Guild.find(params[:id])
-		
+
 		if current_user.guilds.ids.first == @guild.id
 			@page=params[:page].to_i+1
 			#this is what you need to add so that only guild post are shown.

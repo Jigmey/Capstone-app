@@ -14,6 +14,16 @@ body {
   color: #303233;
   background-color: #fafafa;
 }
+button, input, select, textarea{
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: black;
+}
+.profilecontainer{
+  width: 80%;
+  margin: 0 auto;
+}
 a {
   color: #425c75;
 }
@@ -656,6 +666,7 @@ hr {
 .paging {
   margin-bottom: 20px;
   text-align: right;
+  float: left;
 }
 .paging a:hover,
 .paging a:focus {

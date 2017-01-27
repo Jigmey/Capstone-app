@@ -14,6 +14,11 @@ body {
   color: #202020;
   background-color: #e9e4da;
 }
+.friends{
+  position: absolute; 
+  top: 40%; 
+  width: 1px;
+}
 a {
   color: #e84423;
 }
@@ -954,8 +959,8 @@ aside.comments .comment .body {
 .about hr {
   margin-top: 75px;
 }
-.about-portrait {
-  float: right;
+.about-portrait{
+  float: left;
   margin-top: 20px;
   margin-left: 70px;
   -webkit-border-radius: 180px;
@@ -963,7 +968,7 @@ aside.comments .comment .body {
   border-radius: 180px;
 }
 @media (max-width: 767px) {
-  .about-portrait {
+  .about-portrait{
     float: none;
     margin: 40px auto;
   }

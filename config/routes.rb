@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+
 	#General routes
+	get '/' => 'generals#frontpage'
 	get '/generals' => 'generals#index'
 	get '/generals/guild' => 'generals#guild'
 	get '/generals/:id' => 'generals#show'
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
 	post '/users/search'=> 'users#search'
 	post '/users/create'=>'users#create'
 
-	#Guild
+	#Guild routes
 	get '/guilds/newguild' => 'guilds#new'
 	get '/guilds/joinguild' => 'guilds#join'
 	get '/guilds/:id'=> 'guilds#show'
@@ -39,8 +41,10 @@ Rails.application.routes.draw do
 	post '/login/create' => 'login#create'
 	get '/logout'=>'login#destroy'
 
-	#Stream route
-	get'/streams'=> 'streams#index'
+	#Stream routes
+	get'/stream1'=> 'streams#stream1'
+	get'/stream2'=> 'streams#stream2'
+	get'/stream3'=> 'streams#stream3'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

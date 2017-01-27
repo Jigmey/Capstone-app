@@ -1,175 +1,132 @@
 <link rel="stylesheet" href="/css/styles-bluered.css" id="theme-styles">
 
-<div class="widewrapper main">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 blog-main">
-                    <div class="row">
+<div class="maincontainer">
+  <div class="widewrapper main">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-8 blog-main">
+                      <div class="row">
 
-<!--ORIGINAL DIV    <div class="col-md-6 col-sm-6">
-                      <article class=" blog-teaser">
-                          <header>
-                              <div class="body"> -->
-                                  <% if current_user %>
-                                  <div class="col-md-11 ">
-                                      <article class=" blog-teaser">
-                                          <header> 
-                                              <%= form_tag("/posts", method: :post) do %>
-                                                  <%= text_area :body, ""  %>
-                                                  <%= hidden_field_tag(:is_this_guild, "no")%>
-                                                  <p><%= submit_tag "Post"%></p>
-                                              <%end%>
-                                          </header>
-                                      </article>
-                                  </div>
+  <!--ORIGINAL DIV    <div class="col-md-6 col-sm-6">
+                        <article class=" blog-teaser">
+                            <header>
+                                <div class="body"> -->
+                                    <% if current_user %>
+                                      <div class="col-md-11 ">
+                                          <article class=" blog-teaser">
+                                              <header> 
+                                                  <%= form_tag("/posts", method: :post) do %>
+                                                      <%= text_area :body, ""  %>
+                                                      <%= hidden_field_tag(:is_this_guild, "no")%>
+                                                      <p><%= submit_tag "Post"%></p>
+                                                  <%end%>
+                                              </header>
+                                          </article>
+                                      </div>
 
-                                      <%@posts.each do |post|%>
-                                            <div class="col-md-11 ">
-                                                <article class=" blog-teaser">
-                                                    <header>
-                                                        <div class="body">
-                                                            <h3>Post</h3>
-                                                            <p><%=post.id%></p>
-                                                            <p><%=post.text%></p>
-                                                            <hr>
-                                                            
-                                                            <div class="comments">
-                                                                <%post.comments[post.comments.size * 0.3..-1].each do |comment|%>
-                                                                    <p>Username: <%=comment.user.name%></p>
-                                                                    <p><%=auto_link(comment.text)%></p>
-                                                                    <hr>
-                                                                <%end%>
-                                                            </div>
+                                        <%@posts.each do |post|%>
+                                              <div class="col-md-11 ">
+                                                  <article class=" blog-teaser">
+                                                      <header>
+                                                          <div class="body">
+                                                              <h3>Post</h3>
+                                                              <p><%=post.id%></p>
+                                                              <p><%=post.text%></p>
+                                                              <hr>
+                                                              
+                                                              <div class="comments">
+                                                                  <%post.comments[post.comments.size * 0.4..-1].each do |comment|%>
+                                                                      <p>Username: <img src="<%=comment.user.pic%>" alt="Willy Wonka" style="width:50px;height:50px; float: left; margin-top: 0px; margin-left: 0px; border-radius: 180px"><%=comment.user.name%></p>
+                                                                      <p><%=auto_link(comment.text)%></p>
+                                                                      <hr>
+                                                                  <%end%>
+                                                              </div>
 
-                                                            <%= form_tag("/comments", method: :post) do %>
-                                                                <%=  text_area :body, ""  %>
-                                                                <%= hidden_field_tag(:post_id, post.id)%>
-                                                                <%= submit_tag "Comment"%>
-                                                            <%end%>
-                                                        </div>
-                                                    </header>
-                                                </article>
-                                            </div>
+                                                              <%= form_tag("/comments", method: :post) do %>
+                                                                  <%=  text_area :body, ""  %>
+                                                                  <%= hidden_field_tag(:post_id, post.id)%>
+                                                                  <%= submit_tag "Comment"%>
+                                                              <%end%>
+                                                          </div>
+                                                      </header>
+                                                  </article>
+                                              </div>
 
-                                        <%end%>
-                                    <%end%>
-                          <!--</div>
+                                          <%end%>
+                                      <%end%>
+                            <!--</div>
 
-                            </header>
-                        </article>
-                    </div> -->
-                        
-                    </div>
+                              </header>
+                          </article>
+                      </div> -->
+                          
+                      </div>
 
 
-                    <div class="paging">
-                        <a href="/generals" class="newer"><i class="fa fa-long-arrow-left"></i> Main</a>
-                         <span>&bull;</span>
-                        <a href="/generals?page=<%=@page%>" class="older"><i class="fa fa-long-arrow-right"></i>Older</a>
-                    </div>
-                </div>
-                <aside class="col-md-4 blog-aside">
-                    
-                  <div class="aside-widget">
-                    <header>
-                        <a href="/streams"><h3>Herdyn</h3></a>
-                    </header>
-                    <div class="body">
-                    <!--TWITCH STREAMS-->
-                      <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
-                      <div id="{PLAYER_DIV_ID}"></div>
-                      <script type="text/javascript">
-                          var options = {
-                            width: 340,
-                            height: 300,
-                            channel: "{herdyn}", 
-                             //video: "{VIDEO_ID}"       
-                          };
-                          var player = new Twitch.Player("{PLAYER_DIV_ID}", options);
-                          player.setMuted(true);
-                          player.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
-                      </script>
-                    </div>
+                      <div class="paging">
+                          <a href="/generals" class="newer"><i class="fa fa-long-arrow-left"></i> Main</a>
+                           <span>&bull;</span>
+                          <a href="/generals?page=<%=@page%>" class="older"><i class="fa fa-long-arrow-right"></i>Older</a>
+                      </div>
                   </div>
-                  <div class="aside-widget">
-                    <header>
-                        <a href="/streams"><h3>Ster</h3></a>
-                    </header>
-                    <div class="body">
-                    <!--TWITCH STREAMS-->
-                      <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
-                      <div id="{PLAYER_DIV_ID}"></div>
-                      <script type="text/javascript">
-                          var options = {
-                            width: 340,
-                            height: 300,
-                            channel: "{ster}", 
-                             //video: "{VIDEO_ID}"       
-                          };
-                          var player2 = new Twitch.Player("{PLAYER_DIV_ID}", options);
-                          player2.setMuted(true);
-                          player2.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
-                      </script>
-                    </div>
-                  </div>
-                  <div class="aside-widget">
-                    <header>
-                        <a href="/streams"><h3>Vgbootcamp</h3></a>
-                    </header>
-                    <div class="body">
-                    <!--TWITCH STREAMS-->
-                      <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
-                      <div id="{PLAYER_DIV_ID}"></div>
-                      <script type="text/javascript">
-                          var options = {
-                            width: 340,
-                            height: 300,
-                            channel: "{vgbootcamp}", 
-                             //video: "{VIDEO_ID}"       
-                          };
-                          var player3 = new Twitch.Player("{PLAYER_DIV_ID}", options);
-                          player3.setMuted(true);
-                          player3.addEventListener(Twitch.Player.PAUSE, () => { console.log('Player is paused!'); });
-                      </script>
-                    </div>
-                  </div>
-
+                  <aside class="col-md-4 blog-aside">
+                  <!--Twitch Stream-->                  
                     <div class="aside-widget">
-                        <header>
-                            <h3>Authors Favorites</h3>
-                        </header>
-                        <div class="body">
-                            <ul class="tales-list">
-                                <li><a href="index.html">Email Encryption Explained</a></li>
-                                <li><a href="#">Selling is a Function of Design.</a></li>
-                                <li><a href="#">It’s Hard To Come Up With Dummy Titles</a></li>
-                                <li><a href="#">Why the Internet is Full of Cats</a></li>
-                                <li><a href="#">Last Made-Up Headline, I Swear!</a></li>
-                            </ul>
-                        </div>
+                      <header>
+                          <a href="/stream1"><h3>Herdyn</h3></a>
+                      </header>
+                      <div class="body">
+                      <!--TWITCH STREAMS-->
+                        <iframe 
+                          src="http://player.twitch.tv/?channel={herdyn}" 
+                          height="300" 
+                          width="340" 
+                          frameborder="0" 
+                          scrolling="no"
+                          allowfullscreen="true"
+                          Mute="true">
+                        </iframe>
+                      </div>
                     </div>
-
                     <div class="aside-widget">
-                        <header>
-                            <h3>Tags</h3>
-                        </header>
-                        <div class="body clearfix">
-                            <ul class="tags">
-                                <li><a href="#">OpenPGP</a></li>
-                                <li><a href="#">Django</a></li>
-                                <li><a href="#">Bitcoin</a></li>
-                                <li><a href="#">Security</a></li>
-                                <li><a href="#">GNU/Linux</a></li>
-                                <li><a href="#">Git</a></li>
-                                <li><a href="#">Homebrew</a></li>
-                                <li><a href="#">Debian</a></li>                            
-                            </ul>
-                        </div>
+                      <header>
+                          <a href="/stream2"><h3>Moonmoon_ow</h3></a>
+                      </header>
+                      <div class="body">
+                      <!--TWITCH STREAMS-->
+                        <iframe 
+                          src="http://player.twitch.tv/?channel={moonmoon_ow}" 
+                          height="300" 
+                          width="340" 
+                          frameborder="0" 
+                          scrolling="no"
+                          allowfullscreen="true"
+                          Mute="true">
+                        </iframe>
+                      </div>
                     </div>
-                </aside>
-            </div>
-        </div>
-    </div>
+                    <div class="aside-widget">
+                      <header>
+                          <a href="/stream3"><h3>Imaqtpie</h3></a>
+                      </header>
+                      <div class="body">
+                      <!--TWITCH STREAMS-->
+                        <iframe 
+                          src="http://player.twitch.tv/?channel={imaqtpie}" 
+                          height="300" 
+                          width="340" 
+                          frameborder="0" 
+                          scrolling="no"
+                          allowfullscreen="true"
+                          Mute="true">
+                        </iframe>
+                      </div>
+                    </div>   
+                  </aside>
+              </div>
+          </div>
+  </div>
+</div>
 
     <footer>
         <div class="widewrapper footer">

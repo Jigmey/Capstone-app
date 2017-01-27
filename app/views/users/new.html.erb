@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/css/styles-bluered.css" id="theme-styles">
+
 <%= form_tag("/users/create", method: :post) do %>
 	<div>  
 	  <%= label_tag(:username) %>
@@ -18,11 +20,13 @@
 	<div>    
 	  <%= label_tag(:password_conformation) %>
 	  <%= password_field_tag(:password_conformation) %>
+	</div >
+	<div>
+		<%= submit_tag "Create" %>
 	</div>
-	<%= submit_tag "Create" %>
 <% end %>
 <hr>
-<img src="http://cdn.appstorm.net/ipad.appstorm.net/files/2011/12/Icon31.png" alt="Willy Wonka" class="about-portrait img-responsive">
+<p><img src="http://cdn.appstorm.net/ipad.appstorm.net/files/2011/12/Icon31.png" alt="Willy Wonka" style="width:60px;height:60px; float: left; margin-top: 0px; margin-left: 0px; border-radius: 180px"></p>
 <p> Hi Fellow Gamers,</p>
 <p>Profile Pics need to be a URL image the size of an icon.</p>
 <p>That is all.</p>

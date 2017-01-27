@@ -14,6 +14,16 @@ body {
   color: #2c3e50;
   background-color: #feffff;
 }
+button, input, select, textarea{
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: black;
+}
+.maincontainer{
+  width: 80%;
+  margin: 0 auto;
+}
 a {
   color: #5b6268;
 }
@@ -523,7 +533,7 @@ hr {
   }
 }
 .blog-aside {
-  padding-top: 125px;
+  padding-top: 20px;
 }
 @media (max-width: 767px) {
   .blog-aside {

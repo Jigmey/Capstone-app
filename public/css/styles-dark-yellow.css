@@ -14,6 +14,20 @@ body {
   color: #d3dae1;
   background-color: #393840;
 }
+button, input, select, textarea{
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: black;
+}
+.guildcontainer{
+  width: 80%;
+  margin: 0 auto;
+}
+.guildpic{
+  height: 300px;
+  width:100%;  
+}
 a {
   color: #ffdb32;
 }
