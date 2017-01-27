@@ -20,6 +20,10 @@ button, input, select, textarea{
   line-height: inherit;
   color: black;
 }
+.loginstyle{
+  text-align: center; 
+  padding-top: 10%;
+}
 .profilecontainer{
   width: 80%;
   margin: 0 auto;
@@ -666,7 +670,6 @@ hr {
 .paging {
   margin-bottom: 20px;
   text-align: right;
-  float: left;
 }
 .paging a:hover,
 .paging a:focus {

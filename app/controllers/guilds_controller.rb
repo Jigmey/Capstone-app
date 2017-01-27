@@ -45,6 +45,7 @@ class GuildsController < ApplicationController
 		@new_guild= Guild.new(
 			name: params[:name],
 			description: params[:description],
+			image_url: params[:image_url]
 			)
 		p @new_guild.users.ids
 
@@ -56,7 +57,7 @@ class GuildsController < ApplicationController
 			p "found"
 
 			p "start update"
-			if current_user_guild.guild == nil
+			if !current_user_guild=UserGuild.where(user_id: current_user.id)
 				current_user_guild.update(guild_id: @new_guild.id)
 			end
 			p "updated"

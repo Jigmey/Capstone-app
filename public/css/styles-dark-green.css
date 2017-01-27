@@ -20,6 +20,32 @@ button, input, select, textarea{
   line-height: inherit;
   color: black;
 }
+.introduction{
+  font-size: 24px;
+  text-align: center;
+  margin-top: 7%;
+
+}
+.story1{
+  color: skyblue;
+  text-align: center;
+}
+.story2{
+  color: #5EC099;
+  text-align: center;
+}
+.story3{
+  color: lightblue;
+  text-align: center;
+}
+.story4{
+  color: #6F7ADC;
+  text-align: center;
+}
+.story5{
+  color: white;
+  text-align: center;
+}
 a {
   color: #3ab159;
 }
@@ -35,7 +61,7 @@ h1 {
   font-family: 'PT Serif', serif;
 }
 h2 {
-  font-size: 30px;
+  font-size: 40px;
   line-height: 40px;
   font-family: 'Open Sans', sans-serif;
 }
@@ -68,14 +94,18 @@ hr {
   padding-top: 55px;
   padding-bottom: 55px;
 }
-.masthead #logo {
+.masthead #logo a{
   float: left;
   display: block;
-  color: #ffffff;
+  color: #dadada;
   font-family: 'PT Serif', serif;
   font-size: 39px;
   text-transform: uppercase;
   margin-top: 10px;
+
+}
+.masthead #logo a:hover{
+  color:white;
 }
 .masthead #logo img {
   margin-top: -10px;

@@ -20,6 +20,18 @@ button, input, select, textarea{
   line-height: inherit;
   color: black;
 }
+.guildstyle{
+  text-align: center; 
+  padding-top: 10%;
+}
+.guildmembers{
+
+  float:right;
+}
+.guildmemberspic{
+  top: 10%;
+  width: 1px;
+}
 .guildcontainer{
   width: 80%;
   margin: 0 auto;
@@ -48,10 +60,12 @@ h2 {
   font-family: 'Open Sans', sans-serif;
 }
 h3 {
-  font-size: 21px;
+  font-size: 24px;
   line-height: 30px;
   font-weight: normal;
   font-family: 'Open Sans', sans-serif;
+  color: white;
+  float: right;
 }
 hr {
   border-top-color: #44434c;

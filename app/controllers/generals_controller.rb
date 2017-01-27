@@ -24,10 +24,10 @@ class GeneralsController < ApplicationController
 		@user= User.find(params[:id])
 		p current_user.friendships.where(user_id: current_user.id).where(friend_id: @user.id)
 		@page=params[:page].to_i+1
-		if params[:page]
-			@posts=Post.where(is_this_guild: "no").where(user_id:current_user).limit(4).order("created_at desc").offset(@page*4-4)
+		if params[:page] && @user
+			@posts=Post.where(is_this_guild: "no").where(user_id:@user.id).limit(4).order("created_at desc").offset(@page*4-4)
 		else 
-			@posts=Post.where(is_this_guild: "no").where(user_id:current_user).limit(4).order("created_at desc")
+			@posts=Post.where(is_this_guild: "no").where(user_id:@user.id).limit(4).order("created_at desc")
 		end
 		@comments=Comment.where(user_id:@user)
 		render 'show.html.erb'

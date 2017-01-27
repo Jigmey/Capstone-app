@@ -20,6 +20,10 @@ button, input, select, textarea{
   line-height: inherit;
   color: black;
 }
+.signupstyle{
+  text-align: center; 
+  padding-top: 10%;
+}
 .maincontainer{
   width: 80%;
   margin: 0 auto;
