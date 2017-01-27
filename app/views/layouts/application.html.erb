@@ -1,37 +1,123 @@
 
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-    
-    <%= csrf_meta_tags %>
+    <meta charset="utf-8">
+    <title>Tales - Blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+    <!-- Bootstrap styles -->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+
+  <!-- Font-Awesome -->
+    <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css">
+
+    <!-- Google Webfonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600%7CPT+Serif:400,400italic' rel='stylesheet' type='text/css'>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles-dark-green.css" id="theme-styles">
+
+    <!--[if lt IE 9]>      
+        <script src="modules/respond/html5-3.6-respond-1.1.0.min.js"></script>
+    <![endif]-->
+
+    <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script>window.jQuery || document.write('<script src="node_modules/jquery/dist/jquery.min.js"><\/script>')</script>
+</head>
+<body>
+<!--FLASH MESSAGES-->
   <% flash.each do |name, message| %>
    <div class="alert alert-<%= name %> alert-dismissible" role="alert">
      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
      <%= message.html_safe %>
    </div>
- <% end %>
-  <body>
-  
-    <title>CapstoneApp</title>
-    <%if current_user%>
+  <% end %>
+    <header>
+        <div class="widewrapper masthead">
+            <div class="container">
+                <div id="logo">
+                    GG!
+                    <!--Use the following line instead if you want to use an image logo-->
+                    <!--<img src="img/tales-logo.png" alt="Tales Blog">-->
+                </div>
+
+                <div id="mobile-nav-toggle" class="pull-right">
+                    <a href="#" data-toggle="collapse" data-target=".tales-nav .navbar-collapse">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </div>
+                <!--NAVBAR!!!-->
+                <nav class="pull-right tales-nav">
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav nav-pills navbar-nav">
+                          <%if current_user%>
+
+                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/generals">Home</a></li>
+                          
+                            <li class="dropdown active">
+                                <a class="dropdown-toggle"
+                                   data-toggle="dropdown"
+                                   href="#">
+                                    <%=current_user.name%> 
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/generals/<%=current_user.id%>">Profile</a></li>
+                                    <%if current_user.guilds.ids.first%>
+                                      <li><a href="/guilds/<%=current_user.guilds.ids.first%>">Guild</a></li>
+                                    <%end%>
+                          <%else%>
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/users/signup">Sign Up</a></li>
+                          <%end%>
+                                </ul>
+                            </li>                       
+                        </ul>
+                    </div>
+                </nav>        
+
+            </div>
+        </div>
+
+        <div class="widewrapper subheader">
+            <div class="container">
+                <div class="tales-breadcrumb">
+                    <a href="https://www.youtube.com/watch?v=BGcQzp1p2vs">Welcome to Gamer Guild</a>
+                </div>
+
+                <div class="tales-searchbox">
+                <!--Add a form, needed help with route-->
+                  <%if current_user%>
+                    <%=form_tag "/users/search", method: "post" do%>
+                 
+                        <button class="searchbutton" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <input name="username" list="users" class="searchfield" id="searchbox" type="text" placeholder="Search">
+                        <datalist id="users">
+                          <%User.all.each do |user|%>
+                            <option value=<%=user.name%>>
+                          <%end%>
+                        </datalist>
+                    <%end%>
+                  <%end%>
+                </div>
+            </div>
+        </div>
+    </header>
+
+        
     
-      <li><a href="/generals/<%=current_user.id%>">Profile</a></li>
-      <li><a href="/logout">Logout</a></li>
-      <li><a href="/generals">Home</a></li>
-      <%if current_user.guilds.ids.first%>
-        <li><a href="/guilds/<%=current_user.guilds.ids.first%>">Guild</a></li>
-      <%end%>
-      <p>User: <%=current_user.name%></p>
-    <%elsif%>
-      <li><a href="/login">Login</a></li>
-    <%end%>
+    
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/modules/modernizr/modernizr-custom.js"></script>
     <%= yield %>
-  </body>
+</body>
 </html>

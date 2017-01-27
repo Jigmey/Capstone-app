@@ -1,53 +1,185 @@
-<% if current_user %>
-    <hr>
-    <%current_user.guilds.each do|guild|%>
-        <h2><%=guild.name%></h2>
-        <p><%=guild.description%></p>
-    <%end%>
-    <hr>
-    <%User.all.each do |user|%>
-        <p><%=user.name%></p>
-        <%=form_tag("/friendships/createfriend", method: :post) do%>
-            <%= hidden_field_tag(:friend_id, user.id) %>
-            <%= submit_tag "Add"%>
-        <%end%>
-    <%end%>
-    <hr>
-    
-    <%= form_tag("/posts", method: :post) do %>
-        <%= text_area :body, ""  %>
-        <%= submit_tag "Post"%>
-    <%end%>
-    <%if current_user%>
+<link rel="stylesheet" href="/css/styles-bluered.css" id="theme-styles">
 
-        <%@posts.each do |post|%>
-            <h3>Post</h3>
-            <p><%=post.id%></p>
-            <p><%=post.text%></p>
-            <hr>
-            <%post.comments.each do |comment|%>
-                <p>Username: <%=comment.user.name%></p>
-                <p>Comment</p>
-                <p><%=comment.text%></p>
-                <hr>
-            <%end%> 
+<div class="maincontainer">
+  <div class="widewrapper main">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-8 blog-main">
+                      <div class="row">
 
-            <%= form_tag("/comments", method: :post) do %>
-                <%= text_area :body, ""  %>
-                <%= hidden_field_tag(:post_id, post.id)%>
-                <%= submit_tag "Comment"%>
-            <%end%>
-        <%end%>
-    <%end%>
-    <hr>
-<%end%>
-    
-    <iframe 
-        src="http://player.twitch.tv/?channel=esl_alphacas" 
-        height="400" 
-        width="600" 
-        frameborder="0" 
-        scrolling="no"
-        allowfullscreen="true">
-    </iframe>
+  <!--ORIGINAL DIV    <div class="col-md-6 col-sm-6">
+                        <article class=" blog-teaser">
+                            <header>
+                                <div class="body"> -->
+                                    <% if current_user %>
+                                      <div class="col-md-11 ">
+                                          <article class=" blog-teaser">
+                                              <header> 
+                                                  <%= form_tag("/posts", method: :post) do %>
+                                                      <%= text_area :body, ""  %>
+                                                      <%= hidden_field_tag(:is_this_guild, "no")%>
+                                                      <p><%= submit_tag "Post"%></p>
+                                                  <%end%>
+                                              </header>
+                                          </article>
+                                      </div>
 
+                                        <%@posts.each do |post|%>
+                                              <div class="col-md-11 ">
+                                                  <article class=" blog-teaser">
+                                                      <header>
+                                                          <div class="body">
+                                                              <h3>Post</h3>
+                                                              <p><%=post.id%></p>
+                                                              <p><%=post.text%></p>
+                                                              <hr>
+                                                              
+                                                              <div class="comments">
+                                                                  <%post.comments[post.comments.size * 0.4..-1].each do |comment|%>
+                                                                      <p>Username: <img src="<%=comment.user.pic%>" alt="Willy Wonka" style="width:50px;height:50px; float: left; margin-top: 0px; margin-left: 0px; border-radius: 180px"><%=comment.user.name%></p>
+                                                                      <p><%=auto_link(comment.text)%></p>
+                                                                      <hr>
+                                                                  <%end%>
+                                                              </div>
+
+                                                              <%= form_tag("/comments", method: :post) do %>
+                                                                  <%=  text_area :body, ""  %>
+                                                                  <%= hidden_field_tag(:post_id, post.id)%>
+                                                                  <%= submit_tag "Comment"%>
+                                                              <%end%>
+                                                          </div>
+                                                      </header>
+                                                  </article>
+                                              </div>
+
+                                          <%end%>
+                                      <%end%>
+                            <!--</div>
+
+                              </header>
+                          </article>
+                      </div> -->
+                          
+                      </div>
+
+
+                      <div class="paging">
+                          <a href="/generals" class="newer"><i class="fa fa-long-arrow-left"></i> Main</a>
+                           <span>&bull;</span>
+                          <a href="/generals?page=<%=@page%>" class="older"><i class="fa fa-long-arrow-right"></i>Older</a>
+                      </div>
+                  </div>
+                  <aside class="col-md-4 blog-aside">
+                  <!--Twitch Stream-->                  
+                    <div class="aside-widget">
+                      <header>
+                          <a href="/stream1"><h3>Herdyn</h3></a>
+                      </header>
+                      <div class="body">
+                      <!--TWITCH STREAMS-->
+                        <iframe 
+                          src="http://player.twitch.tv/?channel={herdyn}" 
+                          height="300" 
+                          width="340" 
+                          frameborder="0" 
+                          scrolling="no"
+                          allowfullscreen="true"
+                          Mute="true">
+                        </iframe>
+                      </div>
+                    </div>
+                    <div class="aside-widget">
+                      <header>
+                          <a href="/stream2"><h3>Moonmoon_ow</h3></a>
+                      </header>
+                      <div class="body">
+                      <!--TWITCH STREAMS-->
+                        <iframe 
+                          src="http://player.twitch.tv/?channel={moonmoon_ow}" 
+                          height="300" 
+                          width="340" 
+                          frameborder="0" 
+                          scrolling="no"
+                          allowfullscreen="true"
+                          Mute="true">
+                        </iframe>
+                      </div>
+                    </div>
+                    <div class="aside-widget">
+                      <header>
+                          <a href="/stream3"><h3>Imaqtpie</h3></a>
+                      </header>
+                      <div class="body">
+                      <!--TWITCH STREAMS-->
+                        <iframe 
+                          src="http://player.twitch.tv/?channel={imaqtpie}" 
+                          height="300" 
+                          width="340" 
+                          frameborder="0" 
+                          scrolling="no"
+                          allowfullscreen="true"
+                          Mute="true">
+                        </iframe>
+                      </div>
+                    </div>   
+                  </aside>
+              </div>
+          </div>
+  </div>
+</div>
+
+    <footer>
+        <div class="widewrapper footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 footer-widget">
+                        <h3> <i class="fa fa-wpforms"></i>Statistics</h3>
+
+                        <span>Even we sometimes loose track of how many articles we actually have here.  This one helps:</span>
+
+                        <div class="stats">
+                            <div class="line">
+                                <span class="counter">27</span>
+                                <span class="caption">Articles</span>
+                            </div>
+                            <div class="line">
+                                <span class="counter">208</span>
+                                <span class="caption">Comments</span>
+                            </div>
+                            <div class="line">
+                                <span class="counter">2</span>
+                                <span class="caption">Authors</span>
+                            </div>                    
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 footer-widget">
+                        <h3> <i class="fa fa-star"></i> Hall of Fame</h3>
+                        <ul class="tales-list">
+                            <li><a href="index.html">Why we Need to Encrypt All Communication</a></li>
+                            <li><a href="#">Selling is a Function of Design. Not Vice-Versa.</a></li>
+                            <li><a href="#">It’s Hard To Come Up With Dummy Titles</a></li>
+                            <li><a href="#">Why the Internet is Full of Cats</a></li>
+                            <li><a href="#">Last Made-Up Headline, I Swear!</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-4 footer-widget">
+                        <h3> <i class="fa fa-envelope"></i>Contact Me</h3>
+
+                        <span>I'm happy to hear from my readers. Thoughts, feedback, critique - all welcome! Drop me a line:</span>
+                        
+                        <span class="email">
+                            <a href="#">jimmy@notanactualemail.com</a>, PGP key 0x5AK0BEA1
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="widewrapper copyright">
+            <div class="container">
+                <!--Note: Feel free to remove or change this link as you please. A link to HackerThemes is not required by any means-->
+                Designed by <a href="http://hackerthemes.com" rel="nofollow">HackerThemes</a>
+            </div>
+        </div>
+    </footer>

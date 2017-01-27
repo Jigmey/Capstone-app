@@ -1,10 +1,15 @@
 class UsersController < ApplicationController
 	def new
 	end
+	def search
+		user=User.find_by name:(params[:username])
+		redirect_to "/generals/#{user.id}"
+	end
 	def create
 		@user = User.new(
 	      name: params[:name],
 	      birthdate: params[:birthdate],
+	      pic: params[:pic],
 	      password: params[:password],
 	      password_confirmation: params[:password_confirmation]
 	    )

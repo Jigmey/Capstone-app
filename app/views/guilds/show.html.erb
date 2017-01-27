@@ -1,41 +1,72 @@
-<%if current_user%>
-	<%current_user.guilds.each do|guild|%>
-		<h1><%=guild.name%></h1>
-		<p><%=guild.description%></p>
-	<%end%>
-<%end%>
-<hr>
-<h3>Guild Members</h3>
-<%@user_guilds.each do |guild_members|%>
-	<p><%=guild_members.user.name%></p>
-<%end%>
-<hr>
-
-<%= form_tag("/posts", method: :post) do %>
-	<%= text_area :body, ""  %>
-	<%= submit_tag "Post"%>
-<%end%>
-<!-- Create a-->
-
-<%if current_user%>
-	<%@posts.each do |post|%>
-		<h3>Post</h3>
-		<p><%=post.text%></p>
-		<p><%=post.user.name%></p>
-		<p><%=post.is_this_guild%></p>
-		<hr>
-
-		<%post.comments.each do |comment|%>
-			<p><%=comment.user.name%></p>
-			<p>Comment</p>
-			<p><%=comment.text%></p>
-			<hr>
-		<%end%>	
-
-		<%= form_tag("/comments", method: :post) do %>
-			<%= text_area :body, ""  %>
-			<%= hidden_field_tag(:post_id, post.id)%>
-			<%= submit_tag "Comment"%>
+<link rel="stylesheet" href="/css/styles-dark-yellow.css" id="theme-styles">
+<div class="guildcontainer">
+	<%if current_user%>
+		<%current_user.guilds.each do|guild|%>
+			<img src="<%=guild.image_url%>" alt="guildphoto" class="guildpic">
+			<h1><%=guild.name%></h1>
+			<%=form_tag("/guilds/deleteguild", method: :delete) do %>
+				<%=submit_tag "Leave guild"%>
+	  	<%end%>
+			<p><%=guild.description%></p>
 		<%end%>
 	<%end%>
-<%end%>
+	<hr>
+	<h3>Guild Members</h3>
+
+	<!--WORK ON IF/ELSE STATEMENT-->
+	<%if current_user.user_guilds.length>1%>
+		<%@user_guilds.each do |guild_members|%>
+			<p><%=guild_members.user.name%></p>
+		<%end%>
+	<%end%>
+	<hr>
+	<div class="col-md-8 ">
+	  <article class=" blog-teaser">
+	    <header>
+				<%= form_tag("/posts", method: :post) do %>
+					<%= text_area :body, ""  %>
+					<%=hidden_field_tag(:is_this_guild, "yes")%>
+					<%= submit_tag "Post"%>
+				<%end%>
+			</header>
+		</article>
+
+	<!-- Create a-->
+
+		<%if current_user%>
+			<%@posts.each do |post|%>
+				<div class="col-md-12 ">
+			        <article class=" blog-teaser">
+			            <header>
+							<h3>Post</h3>
+							<p><%=post.text%></p>
+							<p><%=post.user.name%></p>
+							<hr>
+							<div class="comments">
+								<%post.comments.each do |comment|%>
+									<p>Username: <img src="<%=comment.user.pic%>" alt="Willy Wonka" style="width:50px;height:50px; float: left; margin-top: 0px; margin-left: 0px; border-radius: 180px"><%=comment.user.name%></p>
+									<p>Comment</p>
+									<p><%=comment.text%></p>
+									<hr>
+								<%end%>
+							</div>	
+
+							<%= form_tag("/comments", method: :post) do %>
+								<%= text_area :body, ""  %>
+								<%= hidden_field_tag(:post_id, post.id)%>
+								<%= submit_tag "Comment"%>
+							<%end%>
+						</header>
+					</article>
+				</div>
+
+			<%end%>
+
+		<%end%>
+		<div class="paging">
+		  <a href="/guilds/<%=@guild.id%>" class="newer"><i class="fa fa-long-arrow-left"></i> Main</a>
+		  <span>&bull;</span>
+		  <a href="/guilds/<%=@guild.id%>?page=<%=@page%>" class="older"><i class="fa fa-long-arrow-right"></i>Older</a>
+		</div>
+	</div>
+</div>
