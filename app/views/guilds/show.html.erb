@@ -29,6 +29,7 @@
 					<%= text_area :body, ""  %>
 					<%=hidden_field_tag(:is_this_guild, "yes")%>
 					<%= hidden_field_tag(:is_this_profile, "no")%>
+
 					<%= submit_tag "Post"%>
 				<%end%>
 			</header>
@@ -59,6 +60,7 @@
 								<%= hidden_field_tag(:post_id, post.id)%>
 								<%= hidden_field_tag(:is_this_profile, "no")%>
 								<%= hidden_field_tag(:is_this_guild, "yes")%>
+								<%= hidden_field_tag(:id, current_user)%>
 								<%= submit_tag "Comment"%>
 							<%end%>
 						</header>
@@ -142,4 +144,4 @@
                 Created By<a href="https://github.com/Jigmey"> Jigmey Dorjee</a>
             </div>
         </div>
-    </footer>
+</footer>
