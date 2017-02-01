@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   	end
   	helper_method :current_user
 
+  	def profile
+    	@profile = User.find(params[:id])
+  	end
+  	helper_method :profile
+
 end
 
 

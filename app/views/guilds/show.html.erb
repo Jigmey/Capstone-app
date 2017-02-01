@@ -21,23 +21,22 @@
 			<%end%>
 		</div>
 	</div>
-
-	<div class="col-md-8 ">
-	  <article class=" blog-teaser">
-	    <header>
-				<%= form_tag("/posts", method: :post) do %>
-					<%= text_area :body, ""  %>
-					<%=hidden_field_tag(:is_this_guild, "yes")%>
-					<%= hidden_field_tag(:is_this_profile, "no")%>
-
-					<%= submit_tag "Post"%>
-				<%end%>
-			</header>
-		</article>
+		<%if current_user%>
+			<div class="col-md-8 ">
+			  <article class=" blog-teaser">
+			    <header>
+						<%= form_tag("/posts", method: :post) do %>
+							<%= text_area :body, ""  %>
+							<%=hidden_field_tag(:is_this_guild, "yes")%>
+							<%= hidden_field_tag(:is_this_profile, "no")%>
+							<%= hidden_field_tag(:current_user_id, current_user.id)%>
+							<%= submit_tag "Post"%>
+						<%end%>
+					</header>
+				</article>
 
 	<!-- Create a-->
 
-		<%if current_user%>
 			<%@posts.each do |post|%>
 				<div class="col-md-12 ">
 			        <article class=" blog-teaser">

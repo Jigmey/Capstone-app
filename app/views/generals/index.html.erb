@@ -2,68 +2,69 @@
 
 <div class="maincontainer">
   <div class="widewrapper main">
-          <div class="container">
-              <div class="row">
-                  <div class="col-md-8 blog-main">
-                      <div class="row">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 blog-main">
+          <div class="row">
 
   <!--ORIGINAL DIV    <div class="col-md-6 col-sm-6">
                         <article class=" blog-teaser">
                             <header>
                                 <div class="body"> -->
-                                    <% if current_user %>
-                                      <div class="col-md-11 ">
-                                          <article class=" blog-teaser">
-                                              <header> 
-                                                  <%= form_tag("/posts", method: :post) do %>
-                                                      <%= text_area :body, ""  %>
-                                                      <%= hidden_field_tag(:is_this_guild, "no")%>
-                                                      <%= hidden_field_tag(:is_this_profile, "no")%>
-                                                      <p><%= submit_tag "Post"%></p>
-                                                  <%end%>
-                                              </header>
-                                          </article>
-                                      </div>
+            <% if current_user %>
+              <div class="col-md-11 ">
+                <article class=" blog-teaser">
+                  <header> 
+                    <%= form_tag("/posts", method: :post) do %>
+                      <%= text_area :body, ""  %>
+                      <%= hidden_field_tag(:is_this_guild, "no")%>
+                      <%= hidden_field_tag(:is_this_profile, "no")%>
+                      <%= hidden_field_tag(:current_user_id, current_user.id)%>
+                      <p><%= submit_tag "Post"%></p>
+                    <%end%>
+                  </header>
+                </article>
+              </div>
 
-                                        <%@posts.each do |post|%>
-                                              <div class="col-md-11 ">
-                                                  <article class=" blog-teaser">
-                                                      <header>
-                                                          <div class="body">
-                                                              <h3>Post</h3>
-                                                              <p><img src="<%=post.user.pic%>"alt="Willy Wonka" style="width:50px;height:50px; float: left; margin-top: 0px; margin-left: 0px; border-radius: 180px"><%=post.user.name%></p>
-                                                              <p><%=auto_link(post.text)%></p>
-                                                              <hr>
-                                                              
-                                                              <div class="comments">
-                                                                  <%post.comments[post.comments.size * 0.4..-1].each do |comment|%>
-                                                                      <p>Username: <img src="<%=comment.user.pic%>" alt="Willy Wonka" style="width:50px;height:50px; float: left; margin-top: 0px; margin-left: 0px; border-radius: 180px"><%=comment.user.name%></p>
-                                                                      <p><%=auto_link(comment.text)%></p>
-                                                                      <hr>
-                                                                  <%end%>
-                                                              </div>
+              <%@posts.each do |post|%>
+                <div class="col-md-11 ">
+                  <article class=" blog-teaser">
+                    <header>
+                      <div class="body">
+                        <h3>Post</h3>
+                        <p><img src="<%=post.user.pic%>"alt="Willy Wonka" style="width:50px;height:50px; float: left; margin-top: 0px; margin-left: 0px; border-radius: 180px"><%=post.user.name%></p>
+                        <p><%=auto_link(post.text)%></p>
+                        <hr>
+                                    
+                        <div class="comments">
+                          <%post.comments[post.comments.size * 0.4..-1].each do |comment|%>
+                            <p>Username: <img src="<%=comment.user.pic%>" alt="Willy Wonka" style="width:50px;height:50px; float: left; margin-top: 0px; margin-left: 0px; border-radius: 180px"><%=comment.user.name%></p>
+                            <p><%=auto_link(comment.text)%></p>
+                            <hr>
+                          <%end%>
+                        </div>
 
-                                                              <%= form_tag("/comments", method: :post) do %>
-                                                                  <%=  text_area :body, ""  %>
-                                                                  <%= hidden_field_tag(:post_id, post.id)%>
-                                                                  <%= hidden_field_tag(:is_this_profile, "no")%>
-                                                                  <%= hidden_field_tag(:is_this_guild, "no")%>
-                                                                  <%= submit_tag "Comment"%>
-                                                              <%end%>
-                                                          </div>
-                                                      </header>
-                                                  </article>
-                                              </div>
-
-                                          <%end%>
-                                      <%end%>
+                      <%= form_tag("/comments", method: :post) do %>
+                          <%=  text_area :body, ""  %>
+                          <%= hidden_field_tag(:post_id, post.id)%>
+                          <%= hidden_field_tag(:is_this_profile, "no")%>
+                          <%= hidden_field_tag(:is_this_guild, "no")%>
+                          <%= hidden_field_tag(:current_user_id, current_user.id)%>
+                          <%= submit_tag "Comment"%>
+                        <%end%>
+                      </div>
+                    </header>
+                  </article>
+                </div>
+              <%end%>
+            <%end%>
                             <!--</div>
 
                               </header>
                           </article>
                       </div> -->
                           
-                      </div>
+          </div>
 
 
                       <div class="paging">
@@ -71,7 +72,7 @@
                            <span>&bull;</span>
                           <a href="/generals?page=<%=@page%>" class="older">Older<i class="fa fa-long-arrow-right"></i></a>
                       </div>
-                  </div>
+        </div>
                   <aside class="col-md-4 blog-aside">
                   <!--Twitch Stream-->                  
                     <div class="aside-widget">
@@ -126,76 +127,69 @@
                       </div>
                     </div>   
                   </aside>
-              </div>
-          </div>
+      </div>
+    </div>
   </div>
 </div>
 
-    <footer>
-        <div class="widewrapper footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 footer-widget">
-                        <h3> <i class="fa fa-wpforms"></i>News</h3>
-
-                        <span>New Game releases and patches!</span>
-
-                        <ul class="tales-list">
-                            <li><a href="https://gamerant.com/overwatch-players-register-25-million/">
-                            Over 25 Million Players registered on Overwatch</a></li>
-                            <li><a href="https://gamerant.com/mobius-final-fantasy-pc-crossover/">
-                            FFVII Remake for PC</a></li>
-                            <li><a href="https://gamerant.com/destiny-balance-update-february/">
-                            Destiny PvP Balance Update</a></li>
-                            <li><a href="http://wwg.com/2017/01/25/league-of-legends-sewn-chaos-amumu-and-blitzcrank-cancelled/">League of Legends Blitzcrank skin hack?</a></li>
-                            <li><a href="https://gamerant.com/pikachu-3ds-xl-nintendo/">
-                            Pokemon back in Yellow?</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-4 footer-widget">
-                        <h3> <i class="fa fa-star"></i> Top 5 Games of 2017</h3>
-                            <div class="stats">
-                            <div class="line">
-                                <span class="counter">1</span>
-                                <span class="caption">League Of Legends</span>
-                            </div>
-                            <div class="line">
-                                <span class="counter">2</span>
-                                <span class="caption">OverWatch</span>
-                            </div>
-                            <div class="line">
-                                <span class="counter">3</span>
-                                <span class="caption">CS:GO</span>
-                            </div> 
-                            <div class="line">
-                                <span class="counter">4</span>
-                                <span class="caption">Dota 2</span>
-                            </div>
-                            <div class="line">
-                                <span class="counter">5</span>
-                                <span class="caption">Dark and Light</span>
-                            </div>                    
-                        </div>
-                        
-                    </div>
-
-                    <div class="col-md-4 footer-widget">
-                        <h3> <i class="fa fa-envelope"></i>Contact Me</h3>
-
-                        <span>Always happy to have people look at my code and help me grow as a programmer.</span>
-                        
-                        <span class="GitHub">
-                            <p><a href="https://github.com/Jigmey">==>My GitHub!<==</a></p>
-                        </span>
-                    </div>
-                </div>
-            </div>
+<footer>
+  <div class="widewrapper footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 footer-widget">
+          <h3> <i class="fa fa-wpforms"></i>News</h3>
+          <span>New Game releases and patches!</span>
+          <ul class="tales-list">
+              <li><a href="https://gamerant.com/overwatch-players-register-25-million/">
+              Over 25 Million Players registered on Overwatch</a></li>
+              <li><a href="https://gamerant.com/mobius-final-fantasy-pc-crossover/">
+              FFVII Remake for PC</a></li>
+              <li><a href="https://gamerant.com/destiny-balance-update-february/">
+              Destiny PvP Balance Update</a></li>
+              <li><a href="http://wwg.com/2017/01/25/league-of-legends-sewn-chaos-amumu-and-blitzcrank-cancelled/">League of Legends Blitzcrank skin hack?</a></li>
+              <li><a href="https://gamerant.com/pikachu-3ds-xl-nintendo/">
+              Pokemon back in Yellow?</a></li>
+          </ul>
         </div>
-        <div class="widewrapper copyright">
-            <div class="container">
-                <!--Note: Feel free to remove or change this link as you please. A link to HackerThemes is not required by any means-->
-                Created By<a href="https://github.com/Jigmey"> Jigmey Dorjee</a>
+        <div class="col-md-4 footer-widget">
+          <h3> <i class="fa fa-star"></i> Top 5 Games of 2017</h3>
+          <div class="stats">
+            <div class="line">
+                    <span class="counter">1</span>
+                    <span class="caption">League Of Legends</span>
             </div>
+            <div class="line">
+                    <span class="counter">2</span>
+                    <span class="caption">OverWatch</span>
+            </div>
+            <div class="line">
+                    <span class="counter">3</span>
+                    <span class="caption">CS:GO</span>
+            </div> 
+            <div class="line">
+                    <span class="counter">4</span>
+                    <span class="caption">Dota 2</span>
+            </div>
+            <div class="line">
+                    <span class="counter">5</span>
+                    <span class="caption">Dark and Light</span>
+            </div>                    
+          </div>      
         </div>
-    </footer>
+        <div class="col-md-4 footer-widget">
+          <h3> <i class="fa fa-envelope"></i>Contact Me</h3>
+          <span>Always happy to have people look at my code and help me grow as a programmer.</span>        
+          <span class="GitHub">
+            <p><a href="https://github.com/Jigmey">==>My GitHub!<==</a></p>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="widewrapper copyright">
+    <div class="container">
+      <!--Note: Feel free to remove or change this link as you please. A link to HackerThemes is not required by any means-->
+      Created By<a href="https://github.com/Jigmey"> Jigmey Dorjee</a>
+    </div>
+  </div>
+</footer>
