@@ -23,7 +23,7 @@ class GeneralsController < ApplicationController
 	def show
 		p current_user.friendships.where(user_id: current_user.id).where(friend_id: profile.id)
 		@page=params[:page].to_i+1
-		if params[:page] && @user
+		if params[:page] && profile
 			@posts=Post.where(is_this_guild: "no").where(user_id:profile.id).limit(4).order("created_at desc").offset(@page*4-4)
 		else 
 			@posts=Post.where(is_this_guild: "no").where(user_id:profile.id).limit(4).order("created_at desc")

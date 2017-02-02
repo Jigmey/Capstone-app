@@ -2,7 +2,7 @@
 <h3>Welcome to the Friends List!</h3>
 <p>Your Friends</p>
 <div class="friends">
-	<%@user.friendships.each  do |friendship|%> 
+	<%profile.friendships.each  do |friendship|%> 
 		<div>  
 	    	<a href="/generals/<%=friendship.friend_id%>"><p><img src="<%=friendship.friend.pic%>" alt="Willy Wonka" style="width:100px;height:100px; float: left;  margin-top: 0px; margin-left: 0px; border-radius: 180px"><%=friendship.friend.name%></p></a>
 	    <%=form_tag("/friendships/deletefriend", method: :delete) do %>

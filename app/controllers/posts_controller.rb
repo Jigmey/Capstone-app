@@ -8,11 +8,11 @@ class PostsController < ApplicationController
 		p @post.errors.full_messages
 		p "post created?"
 		#need to add the hidden field tag so that it picks up the value and creates it specifically for the guild.
-		if @post=Post.where(user_id:current_user.id).last.is_this_guild == "no" && @post=Post.where(user_id: @user.id).last.is_this_profile == "no"
+		if @post=Post.where(user_id:current_user.id).last.is_this_guild == "no" && @post=Post.where(user_id: profile.id).last.is_this_profile == "no"
 			redirect_to '/generals'
-		elsif @post=Post.where(user_id:current_user.id ).last.is_this_guild == "yes" && @post=Post.where(user_id: @user.id).last.is_this_profile == "no"
-			redirect_to "/guilds/#{@user.guilds.first.id}"
-		elsif @post=Post.where(user_id:current_user.id).last.is_this_profile == "yes" && @post=Post.where(user_id: @user.id).last.is_this_guild == "no"
+		elsif @post=Post.where(user_id:current_user.id ).last.is_this_guild == "yes" && @post=Post.where(user_id: profile.id).last.is_this_profile == "no"
+			redirect_to "/guilds/#{profile.guilds.first.id}"
+		elsif @post=Post.where(user_id:current_user.id).last.is_this_profile == "yes" && @post=Post.where(user_id: profile.id).last.is_this_guild == "no"
 			redirect_to "/generals/#{profile.id}"
 		end
 	end

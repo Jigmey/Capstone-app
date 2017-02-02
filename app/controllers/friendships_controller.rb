@@ -1,6 +1,5 @@
 class FriendshipsController < ApplicationController
 def show
-  @user= User.find(params[:id])
   render 'show.html.erb'
 end
 
